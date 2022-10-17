@@ -8,7 +8,7 @@ import './book.css';
 
 const BookContainer = () => { 
   // books name of reducer
-  const {isLoading }=useSelector((state)=>state.books);
+  const {isLoading , books }=useSelector((state)=>state.books);
   const dispatch=useDispatch();
   useEffect(()=>{
     dispatch(getBooks());
@@ -18,7 +18,7 @@ const BookContainer = () => {
       <hr className='my-5' />
       <div className='row'>
         <div className='col'>
-          <BooksList  isLoading={isLoading}/>
+          <BooksList  isLoading={isLoading} data={books} />
         </div>
         <div className='col side-line'>
           <BookInfo />

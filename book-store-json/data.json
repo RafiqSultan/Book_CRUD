@@ -11,6 +11,12 @@
             "title":" learn react",
             "describe":"learn react thunk",
             "price":40
+        },
+        {
+            "id":3,
+            "title":" learn Redux",
+            "describe":"learn react thunk",
+            "price":40
         }
     ]
 }

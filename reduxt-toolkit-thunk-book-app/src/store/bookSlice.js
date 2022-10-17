@@ -15,19 +15,20 @@ export const getBooks=createAsyncThunk("books/getBooks",async(_, thunkAPI)=> {
 
 const bookSlice= createSlice({
     name:"book",
-    initialState:{books:null, isLoading:false},
+    initialState:{books:[], isLoading:false},
     extraReducers:{
         [getBooks.pending]:(state , action)=>{
             state.isLoading=true;
-            console.log(action);
+            
         },
         [getBooks.fulfilled]:(state , action)=>{
             state.isLoading=false;
-            console.log(action);
+            // save data into satate reducer books
+            state.books=action.payload;
         },
         [getBooks.rejected]:(state , action)=>{
             state.isLoading=false;
-            console.log(action);
+            
         }
     }
 });
