@@ -1,9 +1,13 @@
 import React from 'react';
 
-const BooksList = () => {
+const BooksList = ({isLoading}) => {
   return (
-    <div>
+    <div> 
       <h2>Books List</h2>
+      {
+        isLoading ? ('loading...'):
+        (
+      
       <ul className='list-group'>
         <li className='list-group-item d-flex  justify-content-between align-items-center'>
           <div>Cras justo odio</div>
@@ -17,6 +21,7 @@ const BooksList = () => {
           </div>
         </li>
       </ul>
+        )}
     </div>
   );
 };
