@@ -16,9 +16,9 @@ const Addform = () => {
       Description:Description.current.value
     };
     dispatch(insertBook(data));
-    // title.current.value=null;
-    // price.current.value=null;
-    // Description.current.value=null;
+    title.current.value=null;
+    price.current.value=null;
+    Description.current.value=null;
   };
   return (
     <div className='row'>

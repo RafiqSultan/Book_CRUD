@@ -19,16 +19,10 @@
       "price": 40
     },
     {
+      "title": "php",
+      "price": "80",
+      "Description": "learn php in 2 hours",
       "id": 4
-    },
-    {
-      "id": 5
-    },
-    {
-      "id": 6
-    },
-    {
-      "id": 7
     }
   ]
 }

@@ -20,12 +20,15 @@ export const insertBook= createAsyncThunk("books/insertBooks",async( dataBook,th
 try {
     const insert= await fetch("http://localhost:3005/books", {
         method:'POST',
-        body:JSON.stringify(dataBook),
-        Headers:{
+        body: JSON.stringify(dataBook),
+       headers:{
             'Content-type':'application/json; charset=UTF-8',
         },
     });
     const data=await insert.json();
+    console.log('data is');
+    console.log(data);
+    console.log('data up');
     return data;
     
 } catch (error) {
@@ -64,11 +67,10 @@ const bookSlice= createSlice({
             state.isLoading=false;
             // push data into satate reducer books
             console.log(action.payload);
-            // state.books.push(action.payload);
+            state.books.push(action.payload);
         },
         [insertBook.rejected]:(state , action)=>{
             state.isLoading=false;
-           
             state.error=action.payload;
             
         }
