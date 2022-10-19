@@ -1,28 +1,10 @@
 {
   "books": [
     {
-      "id": 1,
-      "title": " learnreact",
-      "describe": "learn react thunk",
-      "price": 30
-    },
-    {
       "id": 2,
-      "title": " learn react",
-      "describe": "learn react thunk",
-      "price": 40
-    },
-    {
-      "id": 3,
-      "title": " learn Redux",
-      "describe": "learn react thunk",
-      "price": 40
-    },
-    {
-      "title": "php",
-      "price": "80",
-      "Description": "learn php in 2 hours",
-      "id": 4
+      "title": "learn css",
+      "desc": "leeeeecsssssss",
+      "price": 30
     }
   ]
 }

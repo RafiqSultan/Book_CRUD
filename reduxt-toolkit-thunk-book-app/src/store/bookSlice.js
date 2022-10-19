@@ -16,8 +16,9 @@ export const getBooks=createAsyncThunk("books/getBooks",async(_, thunkAPI)=> {
 });
 // Async for insert books
 export const insertBook= createAsyncThunk("books/insertBooks",async( dataBook,thunkAPI) => {
-    const {rejectWithValue}=thunkAPI;
+    const {rejectWithValue , getState}=thunkAPI;
 try {
+    dataBook.userName=getState().auth.name;
     const insert= await fetch("http://localhost:3005/books", {
         method:'POST',
         body: JSON.stringify(dataBook),
@@ -26,15 +27,33 @@ try {
         },
     });
     const data=await insert.json();
-    console.log('data is');
-    console.log(data);
-    console.log('data up');
+    // console.log('data is');
+    // console.log(data);
+    // console.log('data up');
     return data;
     
 } catch (error) {
     return rejectWithValue(error.message);
 }
 });
+
+// Async for delete books
+export const deleteBook = createAsyncThunk('books/deleteBooks',async(id,thunkAPI)=>{
+    const {rejectWithValue}=thunkAPI;
+    try {
+         await fetch(`http://localhost:3005/books/${id}`, {
+            method:'DELETE',
+            headers:{
+                'Content-type':'application/json; charset=UTF-8',
+            },
+        });
+        return id;
+    }
+        catch(error)
+        {
+        return rejectWithValue(error.message);
+    }
+}) ;
 const bookSlice= createSlice({
     name:"book",
     initialState:{books:[], isLoading:false,error:null},
@@ -71,6 +90,21 @@ const bookSlice= createSlice({
         },
         [insertBook.rejected]:(state , action)=>{
             state.isLoading=false;
+            state.error=action.payload;
+            
+        },
+        // delete books
+        [deleteBook.pending]:(state , action)=>{
+            state.error=null;
+            
+        },
+        [deleteBook.fulfilled]:(state , action)=>{
+            
+            // push data into satate reducer books
+            state.books=state.books.filter(el=> el.id !== action.payload);
+        },
+        [deleteBook.rejected]:(state , action)=>{
+           
             state.error=action.payload;
             
         }

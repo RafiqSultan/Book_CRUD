@@ -1,6 +1,9 @@
 import React ,{Fragment}from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector ,useDispatch } from 'react-redux';
+import { logInOut } from '../store/authSlice'; 
 const Header = () => {
+  const {isLoggedIn} = useSelector((state) => state.auth);
+  const dispatch =useDispatch();
   const {error}=useSelector((state)=>state.books);
   return (
     <Fragment>
@@ -13,8 +16,8 @@ const Header = () => {
       <nav className='navbar navbar-dark bg-dark'>
       <span className='navbar-brand mb-0 h1'>My Books</span>
 
-      <button className='btn btn-outline-primary' type='submit'>
-        Log In
+      <button className='btn btn-outline-primary' type='submit' onClick={() => dispatch(logInOut())}>
+        {isLoggedIn ? 'log out' : " log in"}
       </button>
     </nav>
     </Fragment>
