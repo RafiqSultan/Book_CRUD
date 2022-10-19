@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect,useState } from 'react';
 import BookInfo from './BookInfo';
 import BooksList from './BooksList';
 import { useDispatch , useSelector} from 'react-redux';
@@ -8,12 +8,19 @@ import './book.css';
 
 const BookContainer = () => { 
   // books name of reducer
+  const [selectBook, setSelectedBook] = useState({});
   const {isLoading , books }=useSelector((state)=>state.books);
   const {isLoggedIn} = useSelector((state) => state.auth);
   const dispatch=useDispatch();
   useEffect(()=>{
     dispatch(getBooks());
   },[dispatch]);
+
+  // read book
+  const getBookId=(id)=>{
+    const selectInfo=books.find((item)=> item.id === id);
+    setSelectedBook(selectInfo);
+  }
   return (
     <Fragment>
       <hr className='my-5' />
@@ -23,10 +30,12 @@ const BookContainer = () => {
           data={books} 
           isLoggedIn={isLoggedIn}
           deleteBook={deleteBook}
-          dispatch={dispatch}/>
+          dispatch={dispatch}
+          getBookId={getBookId}/>
+          
         </div>
         <div className='col side-line'>
-          <BookInfo />
+          <BookInfo bookInfo={selectBook}/>
         </div>
       </div>
     </Fragment>
