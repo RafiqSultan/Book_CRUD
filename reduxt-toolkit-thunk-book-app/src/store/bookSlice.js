@@ -1,5 +1,5 @@
 import { createSlice , createAsyncThunk } from "@reduxjs/toolkit";
-
+import { logInsert } from "./reportSlice";
 // Async for initail
 export const getBooks=createAsyncThunk("books/getBooks",async(_, thunkAPI)=> {
     const {rejectWithValue}=thunkAPI;
@@ -16,7 +16,7 @@ export const getBooks=createAsyncThunk("books/getBooks",async(_, thunkAPI)=> {
 });
 // Async for insert books
 export const insertBook= createAsyncThunk("books/insertBooks",async( dataBook,thunkAPI) => {
-    const {rejectWithValue , getState}=thunkAPI;
+    const {rejectWithValue , getState , dispatch}=thunkAPI;
 try {
     dataBook.userName=getState().auth.name;
     const insert= await fetch("http://localhost:3005/books", {
@@ -30,10 +30,15 @@ try {
     // console.log('data is');
     // console.log(data);
     // console.log('data up');
+    dispatch(logInsert({name:"insert book" , status:"Success"}));
     return data;
     
 } catch (error) {
-    return rejectWithValue(error.message);
+    
+        dispatch(logInsert({name:"insert book" , status:"Faild"}));
+         return rejectWithValue(error.message);
+    
+    
 }
 });
 
